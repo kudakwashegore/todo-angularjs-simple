@@ -1,0 +1,72 @@
+/*basic specific app css to extend default bootstrap styles*/
+body{
+    background: #d3d3d3;
+    color: #000;
+}
+.header{
+    margin: 15px 0;
+    overflow: hidden;    
+}
+.container{
+    max-width: 825px;
+    padding-bottom: 30px;
+}
+.add-label{
+    padding: 0;
+    line-height: 25px;
+    text-align: right;
+    width: 13%;
+}
+.textbox input{
+    border: none;
+    padding:  3px 10px;
+}
+.total{
+    text-align: center;
+    text-transform: uppercase;
+    max-width: 105px;
+}
+.counter{
+    padding: 9px 0;
+    text-align: center;
+    width: 75px;
+    background: #fff;
+    box-shadow: inset rgba(0,0,0,.5) 1px 1px 3px;
+    line-height: 15px;
+    border-radius: 3px;
+}
+.counter strong{
+    display: block;
+}
+.counter big{
+    display: block;
+    text-transform: uppercase;
+    color: #838080;
+    font-size: 11px;
+}
+.list-header{
+    background: #808080;
+    padding: 15px;
+    overflow: hidden;
+}
+.list-header h2{
+    color: #fff;
+    margin: 0;
+    display: inline-block;
+    line-height: 45px;
+    font-size: 24px;
+}
+.items ul{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.items ul li{
+    padding: 20px 15px;
+    border-top: solid #d3d3d3 2px;
+    list-style: none;
+    background: #fff;
+    font-weight: bold;
+    position: relative;
+}

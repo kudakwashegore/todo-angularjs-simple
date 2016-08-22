@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+  <head>    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Todo App</title>
+    <link href=" //maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- load angularjs library and Google drag module -->
+    <script src=" //code.angularjs.org/1.5.7/angular.min.js"></script>  
+    <script src="js/modules/angular-drag.min.js"></script>
+    
+    <!-- load app js files as separated main app, directives, services and controllers -->
+    <script src="js/app.js"></script>
+    <script src="js/directives/ngenter.js"></script> 
+    <script src="js/services/todojsonfactory.js"></script> 
+    <script src="js/controllers/maincontroller.js"></script>   
+  </head>
+
+  <body ng-app="todo">
+    <!-- bind main controller to div.container -->
+    <div class="container" ng-controller="mainController">
+        
+        <div class="header clearfix">
+            <div class="col-lg-2 col-md-2 add-label"><strong>add project</strong></div>
+            <div class="col-lg-2 col-md-2 textbox">
+                <!-- bind textbox to newProject scope object -->
+                <form name="form">
+                    <input type="text" name="title" ng-enter="newProject.addProject(form.$valid)" ng-model="newProject.project" required ng-pattern="/^[a-z0-9]+$/i"> 
+                    <span ng-show="form.title.$invalid && newProject.validate">Invalid</span>
+                </form>
+            </div>
+            <div class="col-lg-2 col-md-2 pull-right total">
+                <strong>Total</strong>
+                <div class="counter">
+                    <!-- display grand total from total object -->
+                    <strong>{{total.all()}}</strong>
+                    <big>Projects</big>
+                </div>
+            </div>  
+        </div>
+
+        <div class="row" data-ng-model="allData">
+            
+            <div class="items to-do col-lg-4 col-md-4">
+                <div class="list-header">
+                    <h2>To do</h2>
+                    <div class="counter pull-right">
+                        <strong>{{total.todo}}</strong>
+                        <big>Projects</big>
+                    </div>
+                </div>
+                
+                <!-- bind ul list data to dnd-list module to make the ul a drop zone-->
+                <ul dnd-list="todoData">
+                    <!-- loop through data and diplay, dnd-draggable will make the li to be draggable and dnd-moved will listen to dragged event and remove item from the list-->
+                    <li ng-repeat="project in todoData" dnd-draggable="project" dnd-moved="todoData.splice($index, 1)">{{project.title}}</li>
+                </ul>
+
+            </div>
+
+            <div class="items in-progress  col-lg-4 col-md-4">
+                <div class="list-header">
+                    <h2>In progress</h2>
+                    <div class="counter pull-right">
+                        <strong>{{total.progress}}</strong>
+                        <big>Projects</big>
+                    </div>
+                </div>
+                
+                <!-- bind ul list data to dnd-list module to make the ul a drop zone-->
+                <ul dnd-list="progressData">
+                    <!-- loop through data and diplay, dnd-draggable will make the li to be draggable and dnd-moved will listen to dragged event and remove item from the list-->
+                    <li ng-repeat="project in progressData" dnd-draggable="project" dnd-moved="progressData.splice($index, 1)">{{project.title}}</li>
+                </ul>
+            </div>
+
+
+            <div class="items done  col-lg-4 col-md-4">
+                <div class="list-header">
+                <h2>Done</h2>
+                <div class="counter pull-right">
+                    <strong>{{total.done}}</strong>
+                    <big>Projects</big>
+                </div>
+                </div>
+                
+                <!-- bind ul list data to dnd-list module to make the ul a drop zone-->
+                <ul dnd-list="doneData">
+                    <!-- loop through data and diplay, dnd-draggable will make the li to be draggable and dnd-moved will listen to dragged event and remove item from the list-->
+                    <li ng-repeat="project in doneData" dnd-draggable="project" dnd-moved="doneData.splice($index, 1)">{{project.title}}</li>
+                </ul>
+            </div>
+            
+        </div>
+
+    </div> 
+  </body>
+</html>
