@@ -57,7 +57,7 @@
                 <!-- bind ul list data to dnd-list module to make the ul a drop zone-->
                 <ul dnd-list="todoData">
                     <!-- loop through data and diplay, dnd-draggable will make the li to be draggable and dnd-moved will listen to dragged event and remove item from the list-->
-                    <li ng-repeat="project in todoData" dnd-draggable="project" dnd-moved="todoData.splice($index, 1)">{{project.title}}</li>
+                    <li ng-repeat="project in todoData" dnd-draggable="project" dnd-moved="ItemsSorted(todoData,$index)">{{project.title}}</li>
                 </ul>
 
             </div>
@@ -74,7 +74,7 @@
                 <!-- bind ul list data to dnd-list module to make the ul a drop zone-->
                 <ul dnd-list="progressData">
                     <!-- loop through data and diplay, dnd-draggable will make the li to be draggable and dnd-moved will listen to dragged event and remove item from the list-->
-                    <li ng-repeat="project in progressData" dnd-draggable="project" dnd-moved="progressData.splice($index, 1)">{{project.title}}</li>
+                    <li ng-repeat="project in progressData" dnd-draggable="project" dnd-moved="ItemsSorted(progressData,$index)">{{project.title}}</li>
                 </ul>
             </div>
 
@@ -91,7 +91,7 @@
                 <!-- bind ul list data to dnd-list module to make the ul a drop zone-->
                 <ul dnd-list="doneData">
                     <!-- loop through data and diplay, dnd-draggable will make the li to be draggable and dnd-moved will listen to dragged event and remove item from the list-->
-                    <li ng-repeat="project in doneData" dnd-draggable="project" dnd-moved="doneData.splice($index, 1)">{{project.title}}</li>
+                    <li ng-repeat="project in doneData" dnd-draggable="project" dnd-moved="ItemsSorted(doneData,$index)">{{project.title}}</li>
                 </ul>
             </div>
             

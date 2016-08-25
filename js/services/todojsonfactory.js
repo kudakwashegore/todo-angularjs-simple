@@ -45,6 +45,7 @@
     }
     
     
+    //attach factory function to angular app
     angular
         .module('todo')
         .service('AllToDoListDataFactory', AllToDoListDataFactory);

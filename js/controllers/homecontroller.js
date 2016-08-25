@@ -5,18 +5,17 @@
         //get data all from data factory and assign to a scope variable
         $scope.allData = AllToDoListDataFactory.all();
 
-        
-        //create scope variable to hold data for the 3 stages
-        //data to bind in to do list
-        $scope.todoData =  AllToDoListDataFactory.all().todo_list;
-        //data to bind in progress list
-        $scope.progressData =   AllToDoListDataFactory.all().inprogress_list;
-        //data to bind in done list
-        $scope.doneData =   AllToDoListDataFactory.all().done_list;
-
         //defining scope object for all required totals
         //we wrap them inside $watch so that totals can be updated in real time
         $scope.$watch(function(){
+            //create scope variable to hold data for the 3 stages
+            //data to bind in to do list
+            $scope.todoData =  $scope.allData.todo_list;
+            //data to bind in progress list
+            $scope.progressData =   $scope.allData.inprogress_list;
+            //data to bind in done list
+            $scope.doneData =   $scope.allData.done_list;
+            
             $scope.total = {
                 todo:  AllToDoListDataFactory.todoTotal(),
                 progress: AllToDoListDataFactory.inprogressTotal(),
@@ -35,7 +34,7 @@
                     //add new project to todo list
                     AllToDoListDataFactory.add(this.project);
                     //update UI
-                    $scope.todoData =  AllToDoListDataFactory.all().todo_list;
+                    $scope.allData = AllToDoListDataFactory.all();
                     //clear textfield
                     this.project = "";
                     //hide validation message
@@ -46,10 +45,16 @@
                 }           
             }   
         }
+        
+        $scope.ItemsSorted = function(listData,index){
+            listData.splice(index, 1);
+            AllToDoListDataFactory.orderChanged($scope.allData);
+        }
+        
 
     }
     
-    
+    //attach controller function to angular app
     angular
         .module('todo')
         .controller('HomeController',['$scope', 'AllToDoListDataFactory',HomeController]);    
