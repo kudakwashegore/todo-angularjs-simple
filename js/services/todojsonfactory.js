@@ -1,55 +1,52 @@
 //data service for the app. For testing purpose, we preload the data
 //Here, we could send request to a server side api to get and post data
-angular.module('todo').service('allTodoListDataFactory', function(){
-    return {
-            //property to hold todo data
-            'todo_list':[
-                {
-                    'title':"Project 1"
-                },
-                {
-                    'title':"Project 2"
-                },
-                {
-                    'title':"Project 3"
-                },
-                {
-                    'title':"Project 4"
-                },
-                {
-                    'title':"Project 5"
-                }
-                       
-            ],
-            //column to hold data in progress
-            'inprogress_list':[
-                {
-                    'title':"Project 6"
-                },
-                {
-                    'title':"Project 7"
-                },
-                {
-                    'title':"Project 8"
-                }
-            ],
-            //property to hold done list data
-            'done_list':[
-                {
-                    'title':"Project 9"
-                },
-                {
-                    'title':"Project 10"
-                },
-                {
-                    'title':"Project 11"
-                },
-                {
-                    'title':"Project 12"
-                },
-                {
-                    'title':"Project 13"
-                }
-            ]
-        };
-})
+(function(){
+    function AllToDoListDataFactory(){
+        var ToDoData = {};
+        
+        //initialise local storage
+        ToDoData.storage = new todoDataStore.Store("todo");
+        
+        //add new item to do list
+        ToDoData.add = function(item){
+            item = item || '';
+            this.storage.save({'title': item});
+        }
+        
+        //run when sort order changes and updated local storage
+        ToDoData.orderChanged = function(sortedData){
+            this.storage.orderChanged(sortedData);
+        }
+        
+        //get al data from local storage
+        ToDoData.all = function(){            
+            return this.storage.findAll();
+        }
+        
+        //get totals for all stages
+        ToDoData.todoTotal = function(){
+            return this.all().todo_list.length;
+        }
+        
+        ToDoData.inprogressTotal = function(){
+            return this.all().inprogress_list.length;
+        }
+        
+        ToDoData.doneTotal = function(){
+            return this.all().done_list.length;
+        }
+        
+        //all total
+        ToDoData.allTotal = function(){
+            return (this.todoTotal() + this.inprogressTotal() + this.doneTotal());
+        }
+        
+        return ToDoData;
+    }
+    
+    
+    angular
+        .module('todo')
+        .service('AllToDoListDataFactory', AllToDoListDataFactory);
+    
+})();
