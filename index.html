@@ -29,7 +29,7 @@
             <div class="col-lg-2 col-md-2 textbox">
                 <!-- bind textbox to newProject scope object -->
                 <form name="form">
-                    <input type="text" name="title" ng-enter="newProject.addProject(form.$valid)" ng-model="newProject.project" required ng-pattern="/^[a-z0-9]+$/i"> 
+                    <input type="text" name="title" ng-enter="newProject.addProject(form.$valid)" ng-model="newProject.project" required ng-pattern="/^[a-z0-9]+/i"> 
                     <span ng-show="form.title.$invalid && newProject.validate">Invalid</span>
                 </form>
             </div>
