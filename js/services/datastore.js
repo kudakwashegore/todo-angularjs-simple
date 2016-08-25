@@ -2,9 +2,10 @@
 (function (window) {
 	'use strict';
 
+    //creating our store object.
 	function Store(name){
         this._dbName = name;
-
+        //create local db if not available
 		if (!localStorage[name]) {
 			var data = {'todo_list':[],'inprogress_list':[],'done_list':[]};
 			localStorage[name] = JSON.stringify(data);
@@ -12,12 +13,12 @@
 
     }
     
-    
+    //get all data in local db
     Store.prototype.findAll = function () {
 		return JSON.parse(localStorage[this._dbName]);
 	};
     
-    
+    //save an item in local db
     Store.prototype.save = function (item, id, callback) {
 		var data = JSON.parse(localStorage[this._dbName]);
 		var todos = data.todo_list;
@@ -34,6 +35,7 @@
 		}
 	};
 
+    //run this when sort order changes
     Store.prototype.orderChanged = function (data) {
 		// Stored reordered data into local storage
 		localStorage[this._dbName] = JSON.stringify(data);
