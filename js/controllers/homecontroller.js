@@ -16,6 +16,7 @@
             //data to bind in done list
             $scope.doneData =   $scope.allData.done_list;
             
+            //view object for totals
             $scope.total = {
                 todo:  AllToDoListDataFactory.todoTotal(),
                 progress: AllToDoListDataFactory.inprogressTotal(),
@@ -24,7 +25,7 @@
             }
         });
 
-        //scope object for adding new project to 'to do list'
+        //scope view object for adding new project to 'to do list'
         $scope.newProject = {
             project: "",
             validate: false,
@@ -46,6 +47,7 @@
             }   
         }
         
+        //fired when items are sorted
         $scope.ItemsSorted = function(listData,index){
             listData.splice(index, 1);
             AllToDoListDataFactory.orderChanged($scope.allData);
