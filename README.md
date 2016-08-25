@@ -13,8 +13,7 @@ To run this app, the files needs to run from a web server.<br />
 There is also need to have the internet on, since some of the libraries loads from CDN.<br />
 
 #Future developments
-Fix dragging new between columns<br />
-Add item editing feature <br />
+Add edit and delete buttons<br />
 Adding Karma-Jasmine for testing<br />
 Optmise views by using more directives<br />
 
